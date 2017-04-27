@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>JavaScript Drum Kit #JavaScript30</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>JavaScript Drum Kit</h1>
+      <p>Use the keys 1 to 9</p>
+      <p><a href="https://javascript30.com">#JavaScript30</a> &mdash; <a href="http://ricardoerl.com/drum-kit">Code</a></p>
+    </div>
+    <div class="keys">
+      <div data-key="49" class="key">
+        <div class="key__content">
+          <span>Pad 1</span>
+        </div>
+      </div>
+      <div data-key="50" class="key">
+        <div class="key__content">
+          <span>Pad 2</span>
+        </div>
+      </div>
+      <div data-key="51" class="key">
+        <div class="key__content">
+          <span>Pad 3</span>
+        </div>
+      </div>
+      <div data-key="52" class="key">
+        <div class="key__content">
+          <span>Pad 4</span>
+        </div>
+      </div>
+      <div data-key="53" class="key">
+        <div class="key__content">
+          <span>Pad 5</span>
+        </div>
+      </div>
+      <div data-key="54" class="key">
+        <div class="key__content">
+          <span>Pad 6</span>
+        </div>
+      </div>
+      <div data-key="55" class="key">
+        <div class="key__content">
+          <span>Pad 7</span>
+        </div>
+      </div>
+      <div data-key="56" class="key">
+        <div class="key__content">
+          <span>Pad 8</span>
+        </div>
+      </div>
+      <div data-key="57" class="key">
+        <div class="key__content">
+          <span>Pad 9</span>
+        </div>
+      </div>
+    </div>
+
+    <audio data-key="49" src="sounds/clap.wav"></audio>
+    <audio data-key="50" src="sounds/hihat.wav"></audio>
+    <audio data-key="51" src="sounds/kick.wav"></audio>
+    <audio data-key="52" src="sounds/openhat.wav"></audio>
+    <audio data-key="53" src="sounds/boom.wav"></audio>
+    <audio data-key="54" src="sounds/ride.wav"></audio>
+    <audio data-key="55" src="sounds/snare.wav"></audio>
+    <audio data-key="56" src="sounds/tom.wav"></audio>
+    <audio data-key="57" src="sounds/tink.wav"></audio>
+
+    <script>
+
+      const keys = document.querySelectorAll(".key");
+
+      function removeTransition(e){
+        this.classList.remove("key--playing");
+      }
+      function playSound(e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if (!audio) return false;
+        audio.currentTime = 0;
+        audio.play();
+        key.classList.add("key--playing");
+      }
+
+      // Listeners
+      keys.forEach(key => key.addEventListener("transitionend", removeTransition));
+      window.addEventListener("keyup", playSound);
+
+    </script>
+  </body>
+</html>
